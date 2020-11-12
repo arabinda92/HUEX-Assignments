@@ -35,7 +35,7 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("Reports/pages")
+  @GetMapping("Reports/viewedPages")
   public ResponseEntity<Object> fetchMostViewedPages(@RequestParam(value = "count") Long count,
                                                      @RequestParam(value = "orderBy",
                                                        required = false) String orderBy)
@@ -64,7 +64,7 @@ public class MainController extends BaseController {
   public ResponseEntity<Object> fetchPagesWithActiveUsers(@RequestParam(value = "count") Long count,
                                                           @RequestParam(value = "orderBy",
                                                             required = false) String orderBy) {
-    return ResponseEntity.ok().body(csvService.getPagesWithActiveUsers(count, orderBy);
+    return ResponseEntity.ok().body(csvService.getPagesWithActiveUsers(count, orderBy));
   }
 
   @ApiOperation(value = "To fetch pages with most active users")
@@ -72,7 +72,7 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("pages/reports")
+  @GetMapping("Reports")
   public ResponseEntity<Object> fetchReports(@RequestParam(value = "count") Long count,
                                                           @RequestParam(value = "fromDate",
                                                             required = false) Date fromDate,
