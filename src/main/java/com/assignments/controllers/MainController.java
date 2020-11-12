@@ -35,13 +35,12 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("pages/mostViewed")
-  public ResponseEntity<Object> fetchMostViewedPages(@RequestParam(value = "n") Long n,
-                                                     @RequestParam(value="fromDate")
-                                                     @DateTimeFormat(pattern="YYYY-MM-DD") Date fromDate,
-                                                     @RequestParam(value = "toDate")
-                                                       @DateTimeFormat(pattern="YYYY-MM-DD") Date toDate) {
-    return ResponseEntity.ok().body(csvService.getMostViewedPages(n, fromDate, toDate));
+  @GetMapping("Reports/pages")
+  public ResponseEntity<Object> fetchMostViewedPages(@RequestParam(value = "count") Long count,
+                                                     @RequestParam(value = "orderBy",
+                                                       required = false) String orderBy)
+                                                      {
+    return ResponseEntity.ok().body(csvService.getMostViewedPages(count, orderBy));
   }
 
   @ApiOperation(value = "To fetch pages with most time spent")
@@ -49,14 +48,11 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("pages/mostTimeSpent")
-  public ResponseEntity<Object> fetchMostTimeSpentPages(@RequestParam(value = "number of pages")
-                                                            Long n,
-                                                        @RequestParam(value = "fromDate",
-                                                          required = false) Date fromDate,
-                                                        @RequestParam(value = "toDate",
-                                                          required = false) Date toDate) {
-    return ResponseEntity.ok().body(csvService.getMostTimeSpentPages(n, fromDate, toDate));
+  @GetMapping("Reports/pages")
+  public ResponseEntity<Object> fetchMostTimeSpentPages(@RequestParam(value = "count") Long count,
+                                                        @RequestParam(value = "orderBy",
+                                                          required = false) String orderBy) {
+    return ResponseEntity.ok().body(csvService.getMostTimeSpentPages(count, orderBy));
   }
 
   @ApiOperation(value = "To fetch pages with most active users")
@@ -64,13 +60,24 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("pages/mostActiveUsers")
-  public ResponseEntity<Object> fetchPagesWithActiveUsers(@RequestParam(value = "number of pages")
-                                                              Long n,
+  @GetMapping("Reports/users")
+  public ResponseEntity<Object> fetchPagesWithActiveUsers(@RequestParam(value = "count") Long count,
+                                                          @RequestParam(value = "orderBy",
+                                                            required = false) String orderBy) {
+    return ResponseEntity.ok().body(csvService.getPagesWithActiveUsers(count, orderBy);
+  }
+
+  @ApiOperation(value = "To fetch pages with most active users")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Pages fetched successfully.",
+      response = List.class)
+  })
+  @GetMapping("pages/reports")
+  public ResponseEntity<Object> fetchReports(@RequestParam(value = "count") Long count,
                                                           @RequestParam(value = "fromDate",
                                                             required = false) Date fromDate,
                                                           @RequestParam(value = "toDate",
                                                             required = false) Date toDate) {
-    return ResponseEntity.ok().body(csvService.getPagesWithActiveUsers(n, fromDate, toDate));
+    return ResponseEntity.ok().body(csvService.getReports(count, fromDate, toDate));
   }
 }
