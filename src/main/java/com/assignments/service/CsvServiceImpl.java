@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This is implementation class
@@ -25,7 +23,7 @@ public class CsvServiceImpl implements CsvService{
   @Override
   public List getMostViewedPages(Long count, String orderBy) {
     log.debug("This fetches most viewed pages with count : {}", count);
-    int max=0;
+    TreeMap<String, Integer> responseMap = new TreeMap<>();
     HashMap<String, Integer> checkPagesMap = new HashMap<>();
     List<String> eventLabelList = csvRepository.findAllEventLabel();
     if (eventLabelList == null) {
@@ -38,13 +36,15 @@ public class CsvServiceImpl implements CsvService{
        checkPagesMap.put(cc,1);
      }
     }
-    for (Map.Entry<String, Integer> entry : checkPagesMap.entrySet()) {
-      if (entry.getValue() > max) {
-        max = entry.getValue();
+    List<String> listOfPages = new ArrayList<>();
+    responseMap.putAll(checkPagesMap);
+    for (int i = 1; i <= count; i++) {
+      for (Map.Entry<String, Integer> entry : responseMap.entrySet()) {
+        listOfPages.add(entry.getKey());
       }
     }
-
-    return null;
+    log.debug("List of pages fetched successfully");
+    return listOfPages;
   }
 
   @Override
