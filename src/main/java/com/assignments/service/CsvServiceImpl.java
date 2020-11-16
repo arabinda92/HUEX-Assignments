@@ -1,6 +1,4 @@
 package com.assignments.service;
-
-import com.assignments.util.CsvReaderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +10,6 @@ import java.util.List;
 @Service
 public class CsvServiceImpl implements CsvService{
 
-  @Autowired
-  private CsvReaderUtil csvReaderUtil;
-
   @Override
   public List getMostViewedPages(Long count, String orderBy) {
 
@@ -23,6 +18,7 @@ public class CsvServiceImpl implements CsvService{
 
   @Override
   public List getMostTimeSpentPages(Long count, String orderBy) {
+    //To d
     return null;
   }
 

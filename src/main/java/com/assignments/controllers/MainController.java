@@ -35,7 +35,7 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("Reports/viewedPages")
+  @GetMapping("viewedPages")
   public ResponseEntity<Object> fetchMostViewedPages(@RequestParam(value = "count") Long count,
                                                      @RequestParam(value = "orderBy",
                                                        required = false) String orderBy)
@@ -48,7 +48,7 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("Reports/pages")
+  @GetMapping("pages")
   public ResponseEntity<Object> fetchMostTimeSpentPages(@RequestParam(value = "count") Long count,
                                                         @RequestParam(value = "orderBy",
                                                           required = false) String orderBy) {
@@ -60,7 +60,7 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("Reports/users")
+  @GetMapping("users")
   public ResponseEntity<Object> fetchPagesWithActiveUsers(@RequestParam(value = "count") Long count,
                                                           @RequestParam(value = "orderBy",
                                                             required = false) String orderBy) {
