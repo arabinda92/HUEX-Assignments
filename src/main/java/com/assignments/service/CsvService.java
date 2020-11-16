@@ -32,5 +32,5 @@ public interface CsvService {
    * @param toDate
    * @return list of pages for a specific period
    */
-  List getReports(Long count, Date fromDate, Date toDate);
+  List getReports(String orderBy, Long count, String fromDate, String toDate);
 }

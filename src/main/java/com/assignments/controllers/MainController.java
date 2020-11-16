@@ -72,12 +72,11 @@ public class MainController extends BaseController {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)
   })
-  @GetMapping("Reports")
-  public ResponseEntity<Object> fetchReports(@RequestParam(value = "count") Long count,
-                                                          @RequestParam(value = "fromDate",
-                                                            required = false) Date fromDate,
-                                                          @RequestParam(value = "toDate",
-                                                            required = false) Date toDate) {
-    return ResponseEntity.ok().body(csvService.getReports(count, fromDate, toDate));
+  @GetMapping("timelyReport")
+  public ResponseEntity<Object> fetchReports(@RequestParam(value = "orderBy") String orderBy,
+                                             @RequestParam(value = "count") Long count,
+                                             @RequestParam(value = "fromDate") String fromDate,
+                                             @RequestParam(value = "toDate") String toDate) {
+    return ResponseEntity.ok().body(csvService.getReports(orderBy, count, fromDate, toDate));
   }
 }
