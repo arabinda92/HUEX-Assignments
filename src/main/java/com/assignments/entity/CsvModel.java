@@ -2,6 +2,7 @@ package com.assignments.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * Entity Pojo class for CSV data
@@ -16,7 +17,7 @@ public class CsvModel {
   private String uuid;
 
   @Column (name = "tstamp")
-  private String tstamp;
+  private Timestamp tstamp;
 
   @Column (name = "source")
   private String source;
@@ -40,10 +41,10 @@ public class CsvModel {
   private Long event_value;
 
   @Column (name = "created_at")
-  private String created_at;
+  private Timestamp created_at;
 
   @Column (name = "last_updated_at")
-  private String last_updated_at;
+  private Timestamp last_updated_at;
 
   @Column (name = "location")
   private String location;
@@ -52,9 +53,9 @@ public class CsvModel {
 
   }
 
-  public CsvModel(String uuid, String tstamp, String source, String date, String event_type,
+  public CsvModel(String uuid, Timestamp tstamp, String source, String date, String event_type,
                   String event_category, String event_action, String event_label, Long event_value,
-                  String created_at, String last_updated_at, String location) {
+                  Timestamp created_at, Timestamp last_updated_at, String location) {
     this.uuid = uuid;
     this.tstamp = tstamp;
     this.source = source;
@@ -77,11 +78,11 @@ public class CsvModel {
     this.uuid = uuid;
   }
 
-  public String getTstamp() {
+  public Timestamp getTstamp() {
     return tstamp;
   }
 
-  public void setTstamp(String tstamp) {
+  public void setTstamp(Timestamp tstamp) {
     this.tstamp = tstamp;
   }
 
@@ -141,19 +142,19 @@ public class CsvModel {
     this.event_value = event_value;
   }
 
-  public String getCreated_at() {
+  public Timestamp getCreated_at() {
     return created_at;
   }
 
-  public void setCreated_at(String created_at) {
+  public void setCreated_at(Timestamp created_at) {
     this.created_at = created_at;
   }
 
-  public String getLast_updated_at() {
+  public Timestamp getLast_updated_at() {
     return last_updated_at;
   }
 
-  public void setLast_updated_at(String last_updated_at) {
+  public void setLast_updated_at(Timestamp last_updated_at) {
     this.last_updated_at = last_updated_at;
   }
 

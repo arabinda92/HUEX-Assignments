@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -54,7 +56,21 @@ public class CsvServiceImpl implements CsvService{
 
   @Override
   public List getPagesWithActiveUsers(Long count, String orderBy) {
-    return null;
+    log.debug("This method fetches most active users");
+    SimpleDateFormat datetimeFormatter = new SimpleDateFormat(
+      "yyyy-MM-dd HH:mm:ss");
+    List<CsvModel> csvModelList = csvRepository.findLastUpdatedAt();
+    List<String> responseList = new ArrayList<>();
+    if (csvModelList == null) {
+      throw new CsvException(String.format("last_updated_at column is empty, please insert some records"));
+    }
+    for (int i=1; i<= count ;i++) {
+      for (CsvModel c: csvModelList) {
+        responseList.add(c.getUuid());
+      }
+    }
+    log.debug("Most active users fetched successfully");
+    return responseList;
   }
 
   @Override
