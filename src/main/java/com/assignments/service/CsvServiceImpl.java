@@ -22,6 +22,12 @@ public class CsvServiceImpl implements CsvService{
   @Autowired
   private CsvRepository csvRepository;
 
+  /**
+   * This method will fetch pages with most views
+   * @param count is the request parameter from CLI*
+   * @param orderBy
+   * @return
+   */
   @Override
   public List getMostViewedPages(Long count, String orderBy) {
     log.debug("This fetches most viewed pages with count : {}", count);
@@ -48,12 +54,18 @@ public class CsvServiceImpl implements CsvService{
     log.debug("List of pages fetched successfully");
     return listOfPages;
   }
-
+  //To do : need to write logic for time spent
   @Override
   public List getMostTimeSpentPages(Long count, String orderBy) {
     return null;
   }
 
+  /**
+   * This method will fetch all active users
+   * @param count is the request parameter from CLI
+   * @param orderBy
+   * @return
+   */
   @Override
   public List getPagesWithActiveUsers(Long count, String orderBy) {
     log.debug("This method fetches most active users");
@@ -62,7 +74,7 @@ public class CsvServiceImpl implements CsvService{
     List<CsvModel> csvModelList = csvRepository.findLastUpdatedAt();
     List<String> responseList = new ArrayList<>();
     if (csvModelList == null) {
-      throw new CsvException(String.format("last_updated_at column is empty, please insert some records"));
+      throw new CsvException(String.format("records not found , please insert some records"));
     }
     for (int i=1; i<= count ;i++) {
       for (CsvModel c: csvModelList) {
@@ -72,10 +84,10 @@ public class CsvServiceImpl implements CsvService{
     log.debug("Most active users fetched successfully");
     return responseList;
   }
-
+  //To do : Need to add date filters
   @Override
   public List getReports(String orderBy, Long count, String fromDate, String toDate) {
-
     return null;
   }
 }
+git
