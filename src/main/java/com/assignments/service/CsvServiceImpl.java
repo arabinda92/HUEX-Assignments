@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 
 /**
@@ -71,14 +74,18 @@ public class CsvServiceImpl implements CsvService{
     log.debug("This method fetches most active users");
     SimpleDateFormat datetimeFormatter = new SimpleDateFormat(
       "yyyy-MM-dd HH:mm:ss");
-    List<CsvModel> csvModelList = csvRepository.findLastUpdatedAt();
+    LocalDateTime currentDateTime = LocalDateTime.now();
+    List<CsvModel> csvModelList = csvRepository.findAll();
     List<String> responseList = new ArrayList<>();
     if (csvModelList == null) {
       throw new CsvException(String.format("records not found , please insert some records"));
     }
-    for (int i=1; i<= count ;i++) {
-      for (CsvModel c: csvModelList) {
-        responseList.add(c.getUuid());
+    if (csvModelList != null && csvModelList.size() > 0) {
+      for (CsvModel e : csvModelList) {
+        Duration diff = Duration.between(currentDateTime, e.getLast_updated_at().toLocalDateTime());
+        if (diff.toDays() < 60) {
+          responseList.add(e.getUuid());
+        }
       }
     }
     log.debug("Most active users fetched successfully");

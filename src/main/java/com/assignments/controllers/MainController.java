@@ -67,7 +67,7 @@ public class MainController extends BaseController {
     return ResponseEntity.ok().body(csvService.getPagesWithActiveUsers(count, orderBy));
   }
 
-  @ApiOperation(value = "To fetch pages with most active users")
+  @ApiOperation(value = "To fetch timely reports ")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Pages fetched successfully.",
       response = List.class)

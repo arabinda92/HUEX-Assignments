@@ -19,6 +19,6 @@ public interface CsvRepository extends JpaRepository<CsvModel, String> {
   List<String> findAllEventLabel();
 
   @Query("SELECT c FROM CsvModel c WHERE DATEDIFF(c.created_at,c.last_updated_at) < 60")
-  List<CsvModel> findLastUpdatedAt();
+  List<CsvModel> findActiveUsersByUpdateDate();
 }
 
